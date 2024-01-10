@@ -1,0 +1,73 @@
+###Pagination - load only small chunk of data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=3&$skip=2
+###Filtering - Conditional search of data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=nameFirst eq 'Maria'
+###Wildcard search
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameFirst,'S')
+###Read data by key - GET
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C197A7FB
+###Count records inside entity
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+
+###Insert data with post 
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+    {
+      "nameFirst": "Abhinav",
+      "nameMiddle": "Anand",
+      "nameLast": "Fall",
+      "nameInitials": null,
+      "sex": "M",
+      "language": "E",
+      "phoneNumber": null,
+      "email": "abhinav.anand@itelo.info",
+      "loginName": "FALLF",
+      "Currency_code": "USD",
+      "salaryAmount": 500000,
+      "accountNumber": "8877665544",
+      "bankId": "1210007878",
+      "bankName": "My Bank of San Francisco"
+    }
+
+###I want to increase my salary
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/5d2df504-0059-4f58-ae80-e668d4ae040a
+Content-Type: application/json
+
+    {
+        "salaryAmount": 1000000
+    }
+
+###read new updated data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/5d2df504-0059-4f58-ae80-e668d4ae040a
+
+###Delete the created data
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/5d2df504-0059-4f58-ae80-e668d4ae040a
+
+###Get BPs
+GET http://localhost:4004/odata/v4/CatalogService/BusinessPartnerSet
+###Try deletion
+DELETE http://localhost:4004/odata/v4/CatalogService/BusinessPartnerSet/74867AD200E41EDBA5D8B06885A56052
+###Read POs
+GET http://localhost:4004/odata/v4/CatalogService/POs
+
+###Read POItems
+GET http://localhost:4004/odata/v4/CatalogService/POItems
+
+###Read POs
+GET http://localhost:4004/odata/v4/CatalogService/ProductView/74867AD200E41EDBA5D8B06B26EB4052?$expand=To_Items
+
+###Read POs
+POST http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052/boost
+Content-Type: application/json
+
+{}
+
+###GET Calling function
+GET http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052/largestOrder()
+
+###GET Calling function for cust entity
+GET http://localhost:4004/odata/v4/my/ReadEmployeeSrv
+
+
+
