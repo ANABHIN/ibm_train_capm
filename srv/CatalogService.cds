@@ -7,7 +7,7 @@ using {
 
 using {cappo.cds as cds} from '../db/CDSViews';
 
-
+//test git change
 // service CatalogService @(path: 'CatalogService') {
 //     @readonly // if we want to restrict editing
 //     entity EmployeeSet        as projection on master.employees;
