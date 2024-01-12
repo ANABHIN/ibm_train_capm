@@ -2,15 +2,19 @@
   "name": "ibmcapapp",
   "version": "1.0.0",
   "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
+  "repository": {
+    "type": "git",
+    "url": "<Add your repository here>"
+  },
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@sap/approuter": "^16.0.2",
     "@sap/cds": "^7",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
-    "express": "^4",
     "@sap/cds-hana": "^2",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
     "@sap/xssec": "^3",
+    "express": "^4",
     "passport": "^0"
   },
   "devDependencies": {
@@ -30,5 +34,7 @@
       "db": "hana",
       "auth": "xsuaa"
     }
-  }
+  },
+  "main": "index.js",
+  "author": ""
 }

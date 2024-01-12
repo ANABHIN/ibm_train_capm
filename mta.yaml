@@ -10,6 +10,23 @@ build-parameters:
       commands:
         - npx cds build --production
 modules:
+  - name: ibmcapapp-ui
+    type: nodejs
+    path: app
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    requires:
+      - name: ibmcapapp-xsuaa
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          strictSSL: true
+          forwardAuthToken: true
+          url: '~{srv-url}'
+          
   - name: ibmcapapp-srv
     type: nodejs
     path: gen/srv
@@ -22,8 +39,8 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: ibmcapapp-auth
       - name: ibmcapapp-db
+      - name: ibmcapapp-xsuaa
 
   - name: ibmcapapp-db-deployer
     type: hdb
@@ -34,17 +51,14 @@ modules:
       - name: ibmcapapp-db
 
 resources:
-  - name: ibmcapapp-auth
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        xsappname: ibmcapapp-${org}-${space}
-        tenant-mode: dedicated
   - name: ibmcapapp-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: ibmcapapp-xsuaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
